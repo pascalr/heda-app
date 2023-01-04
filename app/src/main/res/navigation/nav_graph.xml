@@ -12,17 +12,17 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_HomeFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_HomeFragment_to_RecipesFragment"
+            app:destination="@id/RecipesFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="com.heda.SecondFragment"
+        android:id="@+id/RecipesFragment"
+        android:name="com.heda.RecipesFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
 
         <action
-            android:id="@+id/action_SecondFragment_to_HomeFragment"
+            android:id="@+id/action_RecipesFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
     </fragment>
 </navigation>

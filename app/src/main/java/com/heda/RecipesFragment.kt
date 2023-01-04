@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.heda.databinding.FragmentSecondBinding
-import kotlinx.android.synthetic.main.fragment_second.*
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class SecondFragment : Fragment() {
+class RecipesFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
     private lateinit var recipeAdapter: RecipeAdapter
@@ -41,7 +40,7 @@ class SecondFragment : Fragment() {
         binding.rvRecipeItems.layoutManager = LinearLayoutManager(context)
 
         binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_HomeFragment)
+            findNavController().navigate(R.id.action_RecipesFragment_to_HomeFragment)
         }
     }
 
