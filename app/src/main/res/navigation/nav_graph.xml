@@ -3,16 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/HomePage">
 
     <fragment
-        android:id="@+id/FirstFragment"
-        android:name="com.heda.FirstFragment"
-        android:label="@string/first_fragment_label"
+        android:id="@+id/HomePage"
+        android:name="com.heda.HomePage"
+        android:label="@string/"
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/action_HomePage_to_SecondFragment"
             app:destination="@id/SecondFragment" />
     </fragment>
     <fragment
@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_second">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_SecondFragment_to_HomePage"
+            app:destination="@id/HomePage" />
     </fragment>
 </navigation>
