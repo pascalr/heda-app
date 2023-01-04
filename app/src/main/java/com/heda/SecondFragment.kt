@@ -41,7 +41,7 @@ class SecondFragment : Fragment() {
         binding.rvRecipeItems.layoutManager = LinearLayoutManager(context)
 
         binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_SecondFragment_to_HomePage)
+            findNavController().navigate(R.id.action_SecondFragment_to_HomeFragment)
         }
     }
 

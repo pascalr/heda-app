@@ -8,10 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.heda.databinding.FragmentFirstBinding
 
-/**
- * A simple [Fragment] subclass as the default destination in the navigation.
- */
-class HomePage : Fragment() {
+class HomeFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
 
@@ -33,7 +30,7 @@ class HomePage : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_HomePage_to_SecondFragment)
+            findNavController().navigate(R.id.action_HomeFragment_to_SecondFragment)
         }
     }
 
