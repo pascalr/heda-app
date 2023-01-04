@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.heda.databinding.FragmentSecondBinding
+import kotlinx.android.synthetic.main.fragment_second.*
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -14,6 +16,7 @@ import com.heda.databinding.FragmentSecondBinding
 class SecondFragment : Fragment() {
 
     private var _binding: FragmentSecondBinding? = null
+    private lateinit var recipeAdapter: RecipeAdapter
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -31,6 +34,11 @@ class SecondFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        recipeAdapter = RecipeAdapter(mutableListOf(Recipe("Bread"), Recipe("Pizza")))
+
+        binding.rvRecipeItems.adapter = recipeAdapter
+        binding.rvRecipeItems.layoutManager = LinearLayoutManager(context)
 
         binding.buttonSecond.setOnClickListener {
             findNavController().navigate(R.id.action_SecondFragment_to_HomePage)
