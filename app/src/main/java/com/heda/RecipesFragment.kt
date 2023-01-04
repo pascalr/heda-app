@@ -38,10 +38,6 @@ class RecipesFragment : Fragment() {
 
         binding.rvRecipeItems.adapter = recipeAdapter
         binding.rvRecipeItems.layoutManager = LinearLayoutManager(context)
-
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_RecipesFragment_to_HomeFragment)
-        }
     }
 
     override fun onDestroyView() {
