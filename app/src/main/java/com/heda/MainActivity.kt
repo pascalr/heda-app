@@ -9,7 +9,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
-import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
 import com.heda.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +33,30 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
-        }
+        };
+
+        binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab != null && tab.position == 0) {
+                    navController.navigate(R.id.action_RecipesFragment_to_HomeFragment)
+                }
+                if (tab != null && tab.position == 1) {
+                    navController.navigate(R.id.action_HomeFragment_to_RecipesFragment)
+                }
+            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+        })
+
+        //val listener = new TabLayout.OnTabSelectedListener() {
+        //}
+        //binding.tabLayout.addOnTabSelectedListener(listener)
+
+        //binding.home_tab.setOnClickListener {
+        //    findNavController().navigate(R.id.action_RecipesFragment_to_HomeFragment)
+        //}
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
