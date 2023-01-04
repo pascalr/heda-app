@@ -7,14 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.heda.databinding.FragmentSecondBinding
+import com.heda.databinding.RecipesFragmentBinding
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class RecipesFragment : Fragment() {
 
-    private var _binding: FragmentSecondBinding? = null
+    private var _binding: RecipesFragmentBinding? = null
     private lateinit var recipeAdapter: RecipeAdapter
 
     // This property is only valid between onCreateView and
@@ -26,7 +26,7 @@ class RecipesFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentSecondBinding.inflate(inflater, container, false)
+        _binding = RecipesFragmentBinding.inflate(inflater, container, false)
         return binding.root
 
     }

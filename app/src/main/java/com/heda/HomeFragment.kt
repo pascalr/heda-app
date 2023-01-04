@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.heda.databinding.FragmentFirstBinding
+import com.heda.databinding.HomeFragmentBinding
 
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
+    private var _binding: HomeFragmentBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -21,7 +21,7 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        _binding = HomeFragmentBinding.inflate(inflater, container, false)
         return binding.root
 
     }

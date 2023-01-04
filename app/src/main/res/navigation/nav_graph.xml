@@ -9,7 +9,7 @@
         android:id="@+id/HomeFragment"
         android:name="com.heda.HomeFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/home_fragment">
 
         <action
             android:id="@+id/action_HomeFragment_to_RecipesFragment"
@@ -19,7 +19,7 @@
         android:id="@+id/RecipesFragment"
         android:name="com.heda.RecipesFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/recipes_fragment">
 
         <action
             android:id="@+id/action_RecipesFragment_to_HomeFragment"
