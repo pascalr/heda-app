@@ -11,12 +11,24 @@ fun toastShort(context: Context?, text: String) {
 }
 
 fun changePage(fragmentManager: FragmentManager, id: Int) {
-    changePage(fragmentManager, Fragment(id))
+    changeFragment(fragmentManager, R.id.flMain, Fragment(id))
 }
 
 fun changePage(fragmentManager: FragmentManager, frag: Fragment) {
+    changeFragment(fragmentManager, R.id.flMain, frag)
+}
+
+fun changeTab(fragmentManager: FragmentManager, id: Int) {
+    changeFragment(fragmentManager, R.id.flApp, Fragment(id))
+}
+
+fun changeTab(fragmentManager: FragmentManager, frag: Fragment) {
+    changeFragment(fragmentManager, R.id.flApp, frag)
+}
+
+private fun changeFragment(fragmentManager: FragmentManager, id: Int, frag: Fragment) {
     fragmentManager.beginTransaction().apply {
-        replace(R.id.flMain, frag)
+        replace(id, frag)
         addToBackStack(null)
         commit()
     }

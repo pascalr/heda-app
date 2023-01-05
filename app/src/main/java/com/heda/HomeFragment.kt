@@ -8,30 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.heda.databinding.HomeFragmentBinding
 
-class HomeFragment : Fragment() {
-
-    private var _binding: HomeFragmentBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-
-        _binding = HomeFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-
-    }
+class HomeFragment : Fragment(R.layout.home_fragment) {
 
     //override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     //    super.onViewCreated(view, savedInstanceState)
     //}
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
 }

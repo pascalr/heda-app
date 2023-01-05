@@ -12,7 +12,7 @@ class LoginFragment : Fragment(R.layout.login_page) {
         super.onViewCreated(view, savedInstanceState)
 
         btnLogin.setOnClickListener {
-            changePage(parentFragmentManager, HomeFragment())
+            changePage(parentFragmentManager, AppFragment())
         }
 
         btnRegister.setOnClickListener {

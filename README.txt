@@ -1,3 +1,6 @@
+TODO:
+Clear BackStack when loggin in.
+
 FIXME:
 Change tabs, inside recipes go back. Change tabs => CRASH
 
