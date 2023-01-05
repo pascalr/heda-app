@@ -24,12 +24,6 @@ class StartActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        changePage(R.layout.login_page)
-
-        val button: Button = findViewById(R.id.btnRegister)
-        button.setOnClickListener {
-            changePage(R.layout.register_page)
-        }
 
         //Toast.makeText(applicationContext, "StartActivity onCreate", Toast.LENGTH_SHORT).show()
 
@@ -39,13 +33,22 @@ class StartActivity : AppCompatActivity() {
         // Maybe use: onSaveInstanceState and onRestoreInstanceState like here:
         // https://www.tutorialspoint.com/how-to-save-an-android-activity-state-using-save-instance-state
 
-        //val loggedIn = false
-        //if (loggedIn) {
+        val loggedIn = true
+
+        if (loggedIn) {
+            changePage(R.layout.activity_main)
+            //changePage(R.layout.home_fragment)
         //    val i = Intent(this@StartActivity, LoginActivity::class.java)
         //    startActivity(i)
-        //} else {
+        } else {
+            changePage(R.layout.login_page)
+
+            val button: Button = findViewById(R.id.btnRegister)
+            button.setOnClickListener {
+                changePage(R.layout.register_page)
+            }
         //    val i = Intent(this@StartActivity, SyncingActivity::class.java)
         //    startActivity(i)
-        //}
+        }
     }
 }
