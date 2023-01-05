@@ -128,6 +128,15 @@ class StartActivity : AppCompatActivity() {
 
         if (loggedIn) {
             changePage(R.layout.activity_main)
+
+            val homeFragment = RecipesFragment()
+
+            //findViewById(R.id.)
+
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.flFragment, homeFragment)
+                commit()
+            }
             //changePage(R.layout.home_fragment)
         //    val i = Intent(this@StartActivity, LoginActivity::class.java)
         //    startActivity(i)

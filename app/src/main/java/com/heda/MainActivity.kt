@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbar)
 
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
-        setupActionBarWithNavController(navController, appBarConfiguration)
+        //val navController = findNavController(R.id.nav_host_fragment_content_main)
+        //appBarConfiguration = AppBarConfiguration(navController.graph)
+        //setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -39,10 +39,10 @@ class MainActivity : AppCompatActivity() {
         binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab != null && tab.position == 0) {
-                    navController.navigate(R.id.action_RecipesFragment_to_HomeFragment)
+                    //navController.navigate(R.id.action_RecipesFragment_to_HomeFragment)
                 }
                 if (tab != null && tab.position == 1) {
-                    navController.navigate(R.id.action_HomeFragment_to_RecipesFragment)
+                    //navController.navigate(R.id.action_HomeFragment_to_RecipesFragment)
                 }
             }
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -77,8 +77,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_main)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+        //val navController = findNavController(R.id.nav_host_fragment_content_main)
+        //return navController.navigateUp(appBarConfiguration)
+        //        || super.onSupportNavigateUp()
+        return false
     }
 }
