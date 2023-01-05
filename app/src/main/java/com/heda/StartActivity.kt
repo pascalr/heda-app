@@ -9,7 +9,6 @@ import com.heda.ui.login.LoginActivity
 class StartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_start)
 
         //Toast.makeText(applicationContext, "StartActivity onCreate", Toast.LENGTH_SHORT).show()
 
