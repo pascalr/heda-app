@@ -26,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //setContentView(R.layout.activity_start)
 
         val username = binding.username
         val password = binding.password
