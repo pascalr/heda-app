@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/HomeFragment">
+    app:startDestination="@id/SyncingFragment">
 
     <fragment
         android:id="@+id/HomeFragment"
@@ -14,6 +14,16 @@
         <action
             android:id="@+id/action_HomeFragment_to_RecipesFragment"
             app:destination="@id/RecipesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SyncingFragment"
+        android:name="com.heda.SyncingFragment"
+        android:label="@string/loading"
+        tools:layout="@layout/syncing_waiting_screen">
+
+        <action
+            android:id="@+id/action_SyncingFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/RecipesFragment"
