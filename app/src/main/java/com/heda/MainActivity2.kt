@@ -6,14 +6,6 @@ import androidx.fragment.app.Fragment
 
 class MainActivity2 : AppCompatActivity() {
 
-    private fun changePage(page: Int) {
-        supportFragmentManager.beginTransaction().apply {
-            //replace(R.id.flFragment, homeFragment)
-            //commit()
-        }
-        //pageHistory.add(pageHistory.size, page)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
