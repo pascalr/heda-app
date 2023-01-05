@@ -41,7 +41,7 @@ data class Data(
     val favRecipes: List<DataRecipe>
 )
 
-fun getData(callback: (String) -> Any?) {
+fun getData(callback: (String) -> Unit) {
     val client = OkHttpClient()
     val request = Request.Builder()
         .url("https://www.hedacuisine.com/fetch_user/5")
@@ -49,13 +49,8 @@ fun getData(callback: (String) -> Any?) {
 
     client.newCall(request).execute().use { response ->
         if (!response.isSuccessful) throw IOException("Unexpected code $response")
-
-        for ((name, value) in response.headers) {
-            println("$name: $value")
-        }
-
-        val data = response.body!!.string()
-        callback(data)
+        //for ((name, value) in response.headers) {}
+        callback(response.body!!.string())
     }
 }
 
@@ -64,12 +59,14 @@ fun getData(callback: (String) -> Any?) {
  */
 class FetchDataViewModel: ViewModel() {
 
+    var data: Data? = null;
+
     init {
         // Inside a thread, otherwise I get a NetworkOnMainThreadException
         val thread = Thread {
             try {
-                getData { data ->
-                    println(data)
+                getData { json ->
+                    println(json)
 
                     val moshi = Moshi.Builder()
                         .addLast(KotlinJsonAdapterFactory())
@@ -77,8 +74,8 @@ class FetchDataViewModel: ViewModel() {
                     //val jsonAdapter: JsonAdapter<Data> = moshi.adapter<Data>()
                     val jsonAdapter: JsonAdapter<Data> = moshi.adapter(Data::class.java)
 
-                    val d = jsonAdapter.fromJson(data)
-                    println(d)
+                    data = jsonAdapter.fromJson(json);
+                    // TODO: Bind data to recycler view...
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -115,7 +112,7 @@ class StartActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Thread.sleep(10000)
+        //Thread.sleep(10000)
 
         //Toast.makeText(applicationContext, "StartActivity onCreate", Toast.LENGTH_SHORT).show()
 
