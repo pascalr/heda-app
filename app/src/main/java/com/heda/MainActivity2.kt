@@ -19,10 +19,8 @@ class MainActivity2 : AppCompatActivity() {
 
         setContentView(R.layout.main)
 
-        val default = Fragment(R.layout.login_page)
-
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flMain, default)
+            replace(R.id.flMain, LoginFragment())
             commit()
         }
 
