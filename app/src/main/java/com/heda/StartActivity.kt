@@ -6,36 +6,39 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
 
-data class FetchDataUser(
+data class DataUser(
     val name: String
 )
 
-data class FetchDataRecipe(
-    val name: String,
+data class DataRecipe(
+    val name: String?,
     val id: Int,
-    val user_id: Int,
-    val recipe_kind_id: Int,
-    val preparation_time: Int,
-    val cooking_time: Int,
-    val total_time: Int,
-    val json: String,
-    val ingredients: String,
-    val image_slug: String,
-    val original_id: Int,
-    val is_public: Int,
-    val raw_servings: String,
-    val heda_instructions: String
+    val user_id: Int?,
+    val recipe_kind_id: Int?,
+    val preparation_time: Int?,
+    val cooking_time: Int?,
+    val total_time: Int?,
+    val json: String?,
+    val ingredients: String?,
+    val image_slug: String?,
+    val original_id: Int?,
+    val is_public: Int?,
+    val raw_servings: String?,
+    val heda_instructions: String?
 )
 
-data class FetchData(
-    val user: FetchDataUser,
-    val userRecipes: List<FetchDataRecipe>,
-    val favRecipes: List<FetchDataRecipe>
+data class Data(
+    val user: DataUser,
+    val userRecipes: List<DataRecipe>,
+    val favRecipes: List<DataRecipe>
 )
 
 fun getData(callback: (String) -> Any?) {
@@ -62,10 +65,20 @@ fun getData(callback: (String) -> Any?) {
 class FetchDataViewModel: ViewModel() {
 
     init {
+        // Inside a thread, otherwise I get a NetworkOnMainThreadException
         val thread = Thread {
             try {
                 getData { data ->
                     println(data)
+
+                    val moshi = Moshi.Builder()
+                        .addLast(KotlinJsonAdapterFactory())
+                        .build()
+                    //val jsonAdapter: JsonAdapter<Data> = moshi.adapter<Data>()
+                    val jsonAdapter: JsonAdapter<Data> = moshi.adapter(Data::class.java)
+
+                    val d = jsonAdapter.fromJson(data)
+                    println(d)
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
