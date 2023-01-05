@@ -14,10 +14,10 @@ class StartActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (pageHistory.size <= 0) {
+        if (pageHistory.size <= 1) {
             super.onBackPressed()
         } else {
-            setContentView(pageHistory[pageHistory.size-1])
+            setContentView(pageHistory[pageHistory.size-2])
             pageHistory.removeLast()
         }
     }
