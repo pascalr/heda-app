@@ -1,18 +1,35 @@
 package com.heda
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.heda.ui.login.LoginActivity
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import java.io.IOException
+import android.widget.Button
 
 class StartActivity : AppCompatActivity() {
 
+    private val pageHistory: MutableList<Int> = mutableListOf()
+
+    private fun changePage(page: Int) {
+        pageHistory.add(pageHistory.size, page)
+        setContentView(page)
+    }
+
+    override fun onBackPressed() {
+        if (pageHistory.size <= 0) {
+            super.onBackPressed()
+        } else {
+            setContentView(pageHistory[pageHistory.size-1])
+            pageHistory.removeLast()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.syncing_screen)
+        changePage(R.layout.login_page)
+
+        val button: Button = findViewById(R.id.btnRegister)
+        button.setOnClickListener {
+            changePage(R.layout.register_page)
+        }
 
         //Toast.makeText(applicationContext, "StartActivity onCreate", Toast.LENGTH_SHORT).show()
 
@@ -22,13 +39,13 @@ class StartActivity : AppCompatActivity() {
         // Maybe use: onSaveInstanceState and onRestoreInstanceState like here:
         // https://www.tutorialspoint.com/how-to-save-an-android-activity-state-using-save-instance-state
 
-        val loggedIn = false
-        if (loggedIn) {
-            val i = Intent(this@StartActivity, LoginActivity::class.java)
-            startActivity(i)
-        } else {
-            val i = Intent(this@StartActivity, SyncingActivity::class.java)
-            startActivity(i)
-        }
+        //val loggedIn = false
+        //if (loggedIn) {
+        //    val i = Intent(this@StartActivity, LoginActivity::class.java)
+        //    startActivity(i)
+        //} else {
+        //    val i = Intent(this@StartActivity, SyncingActivity::class.java)
+        //    startActivity(i)
+        //}
     }
 }
