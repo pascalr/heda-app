@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.heda.helpers.clearBackStack
 import com.heda.view_models.RouterViewModel
 import kotlinx.android.synthetic.main.login_page.*
 
@@ -17,7 +16,7 @@ class LoginFragment : Fragment(R.layout.login_page) {
 
         btnLogin.setOnClickListener {
             router.changePage(parentFragmentManager) { -> AppFragment() }
-            clearBackStack(parentFragmentManager)
+            router.clearBackStack(parentFragmentManager)
         }
 
         btnRegister.setOnClickListener {

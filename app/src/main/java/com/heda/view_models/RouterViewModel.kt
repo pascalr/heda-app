@@ -14,13 +14,23 @@ class RouterViewModel : ViewModel() {
 
     private var currentPageCreator: () -> Fragment = {-> LoginFragment()}
     private var currentTabCreator: () -> Fragment = {-> HomeFragment()}
+    var tabPosition: Int = 0
 
     fun createCurrentPage(): Fragment {
         return currentPageCreator()
     }
 
+    fun createCurrentTab(): Fragment {
+        return currentTabCreator()
+    }
+
     fun changePage(fragmentManager: FragmentManager, create: () -> Fragment) {
         changeFragment(fragmentManager, R.id.flMain, create)
+    }
+
+    fun changeTab(fragmentManager: FragmentManager, tabPos: Int, create: () -> Fragment) {
+        changeFragment(fragmentManager, R.id.flApp, create)
+        tabPosition = tabPos
     }
 
     fun clearBackStack(manager: FragmentManager) {
