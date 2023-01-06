@@ -27,7 +27,7 @@ class RecipeAdapter(
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
         val recipe = recipes[position]
         holder.itemView.apply {
-            tvRecipeTitle.text = recipe.title
+            tvRecipeTitle.text = recipe.name
             tvRecipeTitle.setOnClickListener {
                 onClick(recipe)
             }

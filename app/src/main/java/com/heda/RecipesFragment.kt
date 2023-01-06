@@ -27,18 +27,15 @@ class RecipesFragment : Fragment(R.layout.recipes_fragment) {
 
         dataViewModel.getData { data ->
 
-            val list = data.userRecipes?.map { dataRecipe -> Recipe(dataRecipe.name ?: "") }
-
             requireActivity().runOnUiThread(Runnable {
                 val onClick = {recipe: Recipe -> router.changeTab(parentFragmentManager, 3) {-> ShowRecipeFragment(recipe)}}
-                recipeAdapter = RecipeAdapter(list?.toMutableList() ?: mutableListOf(), onClick)
+                recipeAdapter = RecipeAdapter(data.userRecipes?.toMutableList() ?: mutableListOf(), onClick)
                 //recipeAdapter = RecipeAdapter(mutableListOf(Recipe("Bread"), Recipe("Pizza")))
 
                 rvRecipeItems.adapter = recipeAdapter
                 rvRecipeItems.layoutManager = LinearLayoutManager(context)
             })
         }
-
 
     }
 }

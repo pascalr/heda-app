@@ -1,6 +1,7 @@
 package com.heda.view_models
 
 import androidx.lifecycle.ViewModel
+import com.heda.models.Recipe
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -12,27 +13,10 @@ data class DataUser(
     val name: String
 )
 
-data class DataRecipe(
-    val name: String?,
-    val id: Int,
-    val user_id: Int?,
-    val recipe_kind_id: Int?,
-    val preparation_time: Int?,
-    val cooking_time: Int?,
-    val total_time: Int?,
-    val json: String?,
-    val ingredients: String?,
-    val image_slug: String?,
-    val original_id: Int?,
-    val is_public: Int?,
-    val raw_servings: String?,
-    val heda_instructions: String?
-)
-
 data class Data(
     val user: DataUser? = null,
-    val userRecipes: List<DataRecipe>? = null,
-    val favRecipes: List<DataRecipe>? = null
+    val userRecipes: List<Recipe>? = null,
+    val favRecipes: List<Recipe>? = null
 )
 
 fun fetchData(callback: (String) -> Unit) {
@@ -57,37 +41,33 @@ class DataViewModel: ViewModel() {
     private var data: Data? = null;
 
     fun getData(callback: (Data) -> Unit) {
-        if (!fetching) {
-            fetching = true
-            // Inside a thread, otherwise I get a NetworkOnMainThreadException
-            val thread = Thread {
-                try {
-                    fetchData { json ->
-                        println("!!!!!!!!!!!!!!!!!!!!!!")
-                        println("!!!!!!!!!!!!!!!!!!!!!!")
-                        println("!!!!!!!!!!!!!!!!!!!!!!")
-                        println("!!!!!!!!!!!!!!!!!!!!!!")
-                        println("!!!!!!!!!!!!!!!!!!!!!!")
-                        println("!!!!!!!!!!!!!!!!!!!!!!")
-                        println("!!!!!!!!!!!!!!!!!!!!!!")
-                        println(json)
+        if (data != null) {
+            callback(data ?: Data())
+        } else {
+            if (!fetching) {
+                fetching = true
+                // Inside a thread, otherwise I get a NetworkOnMainThreadException
+                val thread = Thread {
+                    try {
+                        fetchData { json ->
+                            println(json)
 
-                        val moshi = Moshi.Builder()
-                            .addLast(KotlinJsonAdapterFactory())
-                            .build()
-                        //val jsonAdapter: JsonAdapter<Data> = moshi.adapter<Data>()
-                        val jsonAdapter: JsonAdapter<Data> = moshi.adapter(Data::class.java)
+                            val moshi = Moshi.Builder()
+                                .addLast(KotlinJsonAdapterFactory())
+                                .build()
+                            //val jsonAdapter: JsonAdapter<Data> = moshi.adapter<Data>()
+                            val jsonAdapter: JsonAdapter<Data> = moshi.adapter(Data::class.java)
 
-                        data = jsonAdapter.fromJson(json);
-                        callback(data ?: Data())
+                            data = jsonAdapter.fromJson(json);
+                            callback(data ?: Data())
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
                     }
-                } catch (e: Exception) {
-                    e.printStackTrace()
                 }
+                thread.start()
             }
-            thread.start()
         }
-
         // FIXME: I don't understand why this does not work...
         //viewModelScope.launch {
         //    getData { data ->
