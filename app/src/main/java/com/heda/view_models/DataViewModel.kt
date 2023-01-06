@@ -60,6 +60,13 @@ class DataViewModel: ViewModel() {
         val thread = Thread {
             try {
                 getData { json ->
+                    println("!!!!!!!!!!!!!!!!!!!!!!")
+                    println("!!!!!!!!!!!!!!!!!!!!!!")
+                    println("!!!!!!!!!!!!!!!!!!!!!!")
+                    println("!!!!!!!!!!!!!!!!!!!!!!")
+                    println("!!!!!!!!!!!!!!!!!!!!!!")
+                    println("!!!!!!!!!!!!!!!!!!!!!!")
+                    println("!!!!!!!!!!!!!!!!!!!!!!")
                     println(json)
 
                     val moshi = Moshi.Builder()

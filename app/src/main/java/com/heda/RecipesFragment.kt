@@ -19,9 +19,15 @@ class RecipesFragment : Fragment(R.layout.recipes_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //val fetchDataViewModel = ViewModelProvider(this)[DataViewModel::class.java]
+        val dataViewModel = ViewModelProvider(this)[DataViewModel::class.java]
+        val data = dataViewModel.data
 
-        recipeAdapter = RecipeAdapter(mutableListOf(Recipe("Bread"), Recipe("Pizza")))
+        if (data != null) {
+            val list = data.userRecipes.map { dataRecipe -> Recipe(dataRecipe.name ?: "") }
+            recipeAdapter = RecipeAdapter(list.toMutableList())
+        } else {
+            recipeAdapter = RecipeAdapter(mutableListOf(Recipe("Bread"), Recipe("Pizza")))
+        }
 
         rvRecipeItems.adapter = recipeAdapter
         rvRecipeItems.layoutManager = LinearLayoutManager(context)
