@@ -36,7 +36,9 @@ class ShowRecipeFragment (
             val ings = parseIngredients(recipe?.ingredients)
             requireActivity().runOnUiThread(Runnable {
 
-                tvRecipeInstructions.text = parseInstructions(recipe?.json ?: "")
+                //tvRecipeInstructions.text = parseInstructions(recipe?.json ?: "")
+                val htmlDocument = "<html><body><h1>Test Content</h1><p>Testing, testing, testing...</p></body></html>"
+                wvInstructions.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null)
 
                 if (ings != null) {
                     ingredientAdapter = IngredientAdapter(ings.toMutableList())

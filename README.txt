@@ -1,4 +1,5 @@
 TODO:
+Try using Html.fromHTML (https://stackoverflow.com/questions/37899856/html-fromhtml-is-deprecated-what-is-the-alternative)
 Store images localy.
 Show recipes.
 Clear BackStack when loggin in.

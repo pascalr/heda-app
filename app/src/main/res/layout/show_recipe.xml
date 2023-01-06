@@ -62,11 +62,11 @@
         app:layout_constraintTop_toBottomOf="@+id/rvIngredients"
         android:layout_marginTop="20dp"/>
 
-    <TextView
-        android:id="@+id/tvRecipeInstructions"
+    <WebView
+        android:id="@+id/wvInstructions"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="WIP"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         tools:layout_editor_absoluteX="10dp" />
 
