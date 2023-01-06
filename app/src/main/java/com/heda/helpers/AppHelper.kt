@@ -6,6 +6,12 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import com.heda.R
 import com.heda.models.Ingredient
+import com.heda.models.Node
+import com.heda.view_models.Data
+import com.heda.view_models.fetchData
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 
 fun toastShort(context: Context?, text: String) {
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
@@ -31,4 +37,13 @@ fun parseIngredients(raw: String?): List<Ingredient> {
             null
         }
     }
+}
+
+fun parseInstructions(json: String): String {
+    val moshi = Moshi.Builder()
+        .addLast(KotlinJsonAdapterFactory())
+        .build()
+    val jsonAdapter: JsonAdapter<Node> = moshi.adapter(Node::class.java)
+    val doc = jsonAdapter.fromJson(json);
+    return "Todo print instructions"
 }

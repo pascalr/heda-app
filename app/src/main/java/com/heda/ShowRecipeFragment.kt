@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.heda.adapters.IngredientAdapter
 import com.heda.helpers.parseIngredients
+import com.heda.helpers.parseInstructions
 import com.heda.helpers.setToolbarTitle
 import com.heda.models.Recipe
 import com.heda.view_models.DataViewModel
@@ -33,14 +34,17 @@ class ShowRecipeFragment (
             val recipe = data.userRecipes?.find { r -> r.id == recipe.id }
 
             val ings = parseIngredients(recipe?.ingredients)
-            if (ings != null) {
-                requireActivity().runOnUiThread(Runnable {
+            requireActivity().runOnUiThread(Runnable {
+
+                tvRecipeInstructions.text = parseInstructions(recipe?.json ?: "")
+
+                if (ings != null) {
                     ingredientAdapter = IngredientAdapter(ings.toMutableList())
 
                     rvIngredients.adapter = ingredientAdapter
                     rvIngredients.layoutManager = LinearLayoutManager(context)
-                })
-            }
+                }
+            })
         }
     }
 
