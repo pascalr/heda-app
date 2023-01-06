@@ -2,15 +2,16 @@ package com.heda
 
 import android.os.Bundle
 import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.heda.adapters.RecipeAdapter
+import com.heda.helpers.setToolbarTitle
 import com.heda.models.Recipe
 import com.heda.view_models.DataViewModel
 import com.heda.view_models.RouterViewModel
 import kotlinx.android.synthetic.main.recipes_fragment.*
-
 
 class RecipesFragment : Fragment(R.layout.recipes_fragment) {
 
@@ -21,6 +22,8 @@ class RecipesFragment : Fragment(R.layout.recipes_fragment) {
 
         val router = ViewModelProvider(requireActivity())[RouterViewModel::class.java]
         val dataViewModel = ViewModelProvider(this)[DataViewModel::class.java]
+
+        setToolbarTitle(requireActivity(), requireContext().getString(R.string.recipes))
 
         dataViewModel.getData { data ->
 
