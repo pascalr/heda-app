@@ -30,12 +30,12 @@ data class DataRecipe(
 )
 
 data class Data(
-    val user: DataUser,
-    val userRecipes: List<DataRecipe>,
-    val favRecipes: List<DataRecipe>
+    val user: DataUser? = null,
+    val userRecipes: List<DataRecipe>? = null,
+    val favRecipes: List<DataRecipe>? = null
 )
 
-fun getData(callback: (String) -> Unit) {
+fun fetchData(callback: (String) -> Unit) {
     val client = OkHttpClient()
     val request = Request.Builder()
         .url("https://www.hedacuisine.com/fetch_user/5")
@@ -53,36 +53,41 @@ fun getData(callback: (String) -> Unit) {
  */
 class DataViewModel: ViewModel() {
 
-    var data: Data? = null;
+    var fetching: Boolean = false;
+    private var data: Data? = null;
 
-    init {
-        // Inside a thread, otherwise I get a NetworkOnMainThreadException
-        val thread = Thread {
-            try {
-                getData { json ->
-                    println("!!!!!!!!!!!!!!!!!!!!!!")
-                    println("!!!!!!!!!!!!!!!!!!!!!!")
-                    println("!!!!!!!!!!!!!!!!!!!!!!")
-                    println("!!!!!!!!!!!!!!!!!!!!!!")
-                    println("!!!!!!!!!!!!!!!!!!!!!!")
-                    println("!!!!!!!!!!!!!!!!!!!!!!")
-                    println("!!!!!!!!!!!!!!!!!!!!!!")
-                    println(json)
+    fun getData(callback: (Data) -> Unit) {
+        if (!fetching) {
+            fetching = true
+            // Inside a thread, otherwise I get a NetworkOnMainThreadException
+            val thread = Thread {
+                try {
+                    fetchData { json ->
+                        println("!!!!!!!!!!!!!!!!!!!!!!")
+                        println("!!!!!!!!!!!!!!!!!!!!!!")
+                        println("!!!!!!!!!!!!!!!!!!!!!!")
+                        println("!!!!!!!!!!!!!!!!!!!!!!")
+                        println("!!!!!!!!!!!!!!!!!!!!!!")
+                        println("!!!!!!!!!!!!!!!!!!!!!!")
+                        println("!!!!!!!!!!!!!!!!!!!!!!")
+                        println(json)
 
-                    val moshi = Moshi.Builder()
-                        .addLast(KotlinJsonAdapterFactory())
-                        .build()
-                    //val jsonAdapter: JsonAdapter<Data> = moshi.adapter<Data>()
-                    val jsonAdapter: JsonAdapter<Data> = moshi.adapter(Data::class.java)
+                        val moshi = Moshi.Builder()
+                            .addLast(KotlinJsonAdapterFactory())
+                            .build()
+                        //val jsonAdapter: JsonAdapter<Data> = moshi.adapter<Data>()
+                        val jsonAdapter: JsonAdapter<Data> = moshi.adapter(Data::class.java)
 
-                    data = jsonAdapter.fromJson(json);
-                    // TODO: Bind data to recycler view...
+                        data = jsonAdapter.fromJson(json);
+                        callback(data ?: Data())
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
             }
+            thread.start()
         }
-        thread.start()
+
         // FIXME: I don't understand why this does not work...
         //viewModelScope.launch {
         //    getData { data ->
