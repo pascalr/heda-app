@@ -5,43 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.heda.databinding.RecipesFragmentBinding
+import com.heda.view_models.DataViewModel
+import kotlinx.android.synthetic.main.recipes_fragment.*
 
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
-class RecipesFragment : Fragment() {
+class RecipesFragment : Fragment(R.layout.recipes_fragment) {
 
-    private var _binding: RecipesFragmentBinding? = null
     private lateinit var recipeAdapter: RecipeAdapter
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
-
-    override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
-    ): View? {
-
-        _binding = RecipesFragmentBinding.inflate(inflater, container, false)
-        return binding.root
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //val fetchDataViewModel = ViewModelProvider(this)[DataViewModel::class.java]
+
         recipeAdapter = RecipeAdapter(mutableListOf(Recipe("Bread"), Recipe("Pizza")))
 
-        binding.rvRecipeItems.adapter = recipeAdapter
-        binding.rvRecipeItems.layoutManager = LinearLayoutManager(context)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        rvRecipeItems.adapter = recipeAdapter
+        rvRecipeItems.layoutManager = LinearLayoutManager(context)
     }
 }
