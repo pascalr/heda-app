@@ -6,20 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.recipe_item.view.*
 
-class RecipeAdapter (
-    private val recipes: MutableList<Recipe>
+class RecipeAdapter(
+    private val recipes: MutableList<Recipe>,
+    private val onClick: (Recipe) -> Unit
 ) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>()  {
 
     class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeViewHolder {
-        return RecipeViewHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.recipe_item,
-                parent,
-                false
-            )
-        )
+        return RecipeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.recipe_item, parent, false))
     }
 
     fun addTodo(todo: Recipe) {
@@ -28,9 +23,12 @@ class RecipeAdapter (
     }
 
     override fun onBindViewHolder(holder: RecipeViewHolder, position: Int) {
-        val curTodo = recipes[position]
+        val recipe = recipes[position]
         holder.itemView.apply {
-            tvRecipeTitle.text = curTodo.title
+            tvRecipeTitle.text = recipe.title
+            tvRecipeTitle.setOnClickListener {
+                onClick(recipe)
+            }
         }
     }
 

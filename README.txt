@@ -1,4 +1,6 @@
 TODO:
+Store images localy.
+Show recipes.
 Clear BackStack when loggin in.
 
 FIXME:
