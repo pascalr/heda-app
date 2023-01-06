@@ -26,6 +26,14 @@ fun changeTab(fragmentManager: FragmentManager, frag: Fragment) {
     changeFragment(fragmentManager, R.id.flApp, frag)
 }
 
+fun clearBackStack(manager: FragmentManager) {
+    TODO("FIXME: This does not work... manager.backStackEntryCount is somehow at 0...")
+    //while (manager.backStackEntryCount > 0) {
+    //    println(manager.backStackEntryCount)
+    //    manager.popBackStackImmediate();
+    //}
+}
+
 private fun changeFragment(fragmentManager: FragmentManager, id: Int, frag: Fragment) {
     fragmentManager.beginTransaction().apply {
         replace(id, frag)
