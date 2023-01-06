@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.heda.adapters.RecipeAdapter
+import com.heda.models.Recipe
 import com.heda.view_models.DataViewModel
 import com.heda.view_models.RouterViewModel
 import kotlinx.android.synthetic.main.recipes_fragment.*

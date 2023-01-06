@@ -2,7 +2,7 @@ package com.heda.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.heda.data.LoginRepository
+import com.heda.helpers.LoginRepository
 
 /**
  * ViewModel provider factory to instantiate LoginViewModel.

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import android.util.Patterns
-import com.heda.data.LoginRepository
-import com.heda.data.Result
+import com.heda.helpers.LoginRepository
+import com.heda.helpers.Result
 
 import com.heda.R
 

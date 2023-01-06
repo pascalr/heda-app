@@ -3,6 +3,7 @@ package com.heda
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.heda.models.Recipe
 import kotlinx.android.synthetic.main.show_recipe.*
 
 class ShowRecipeFragment (

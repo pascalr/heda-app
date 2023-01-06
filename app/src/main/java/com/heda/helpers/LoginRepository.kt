@@ -1,7 +1,9 @@
-package com.heda.data
+package com.heda.helpers
 
-import com.heda.data.model.LoggedInUser
+import com.heda.helpers.Result
+import com.heda.models.LoggedInUser
 import java.io.IOException
+import java.util.*
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -32,7 +34,7 @@ class LoginRepository() {
 
         try {
             // TODO: handle loggedInUser authentication
-            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
+            val fakeUser = LoggedInUser(UUID.randomUUID().toString(), "Jane Doe")
             setLoggedInUser(fakeUser)
             return Result.Success(fakeUser)
         } catch (e: Throwable) {

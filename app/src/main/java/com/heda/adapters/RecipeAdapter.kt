@@ -1,9 +1,11 @@
-package com.heda
+package com.heda.adapters
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.heda.R
+import com.heda.models.Recipe
 import kotlinx.android.synthetic.main.recipe_item.view.*
 
 class RecipeAdapter(

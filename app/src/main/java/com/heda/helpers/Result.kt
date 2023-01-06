@@ -1,4 +1,4 @@
-package com.heda.data
+package com.heda.helpers
 
 /**
  * A generic class that holds a value with its loading status.
