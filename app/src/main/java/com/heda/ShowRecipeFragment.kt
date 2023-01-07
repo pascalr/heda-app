@@ -1,5 +1,7 @@
 package com.heda
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -29,7 +31,8 @@ class ShowRecipeFragment (
 
         val dataViewModel = ViewModelProvider(this)[DataViewModel::class.java]
 
-        dataViewModel.getData { data ->
+        val rootDir = requireActivity().getExternalFilesDir(null)
+        dataViewModel.getData(rootDir) { data ->
 
             val recipe = data.userRecipes?.find { r -> r.id == recipe.id }
 
@@ -39,6 +42,12 @@ class ShowRecipeFragment (
                 //tvRecipeInstructions.text = parseInstructions(recipe?.json ?: "")
                 val htmlDocument = "<html><body><h1>Test Content</h1><p>Testing, testing, testing...</p></body></html>"
                 wvInstructions.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null)
+
+                btnRecipeWebsiteLink.setOnClickListener {
+                    val openURL = Intent(android.content.Intent.ACTION_VIEW)
+                    openURL.data = Uri.parse("https://www.hedacuisine.com/r/${recipe?.id}")
+                    startActivity(openURL)
+                }
 
                 if (ings != null) {
                     ingredientAdapter = IngredientAdapter(ings.toMutableList())

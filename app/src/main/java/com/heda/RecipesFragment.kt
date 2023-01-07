@@ -25,7 +25,8 @@ class RecipesFragment : Fragment(R.layout.recipes_fragment) {
 
         setToolbarTitle(requireActivity(), requireContext().getString(R.string.recipes))
 
-        dataViewModel.getData { data ->
+        val rootDir = requireActivity().getExternalFilesDir(null)
+        dataViewModel.getData(rootDir) { data ->
 
             requireActivity().runOnUiThread(Runnable {
                 val onClick = {recipe: Recipe -> router.changeTab(parentFragmentManager, 3) {-> ShowRecipeFragment(recipe)}}

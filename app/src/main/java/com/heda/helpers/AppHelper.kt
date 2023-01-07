@@ -8,7 +8,6 @@ import com.heda.R
 import com.heda.models.Ingredient
 import com.heda.models.Node
 import com.heda.view_models.Data
-import com.heda.view_models.fetchData
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
