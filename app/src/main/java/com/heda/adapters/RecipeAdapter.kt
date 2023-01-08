@@ -5,8 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.heda.R
+import com.heda.helpers.loadImage
 import com.heda.models.Recipe
 import kotlinx.android.synthetic.main.recipe_item.view.*
+import kotlinx.android.synthetic.main.show_recipe.*
 
 class RecipeAdapter(
     private val recipes: MutableList<Recipe>,
@@ -32,6 +34,7 @@ class RecipeAdapter(
                 onClick(recipe)
             }
         }
+        loadImage(recipe.image_slug, holder.itemView.ivRecipeImage)
     }
 
     override fun getItemCount(): Int {

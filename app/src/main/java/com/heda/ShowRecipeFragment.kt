@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.heda.adapters.IngredientAdapter
+import com.heda.helpers.loadImage
 import com.heda.helpers.parseIngredients
 import com.heda.helpers.parseInstructions
 import com.heda.helpers.setToolbarTitle
@@ -16,14 +17,14 @@ import com.heda.view_models.DataViewModel
 import kotlinx.android.synthetic.main.recipes_fragment.*
 import kotlinx.android.synthetic.main.show_recipe.*
 
-class ShowRecipeFragment (
-    private val recipe: Recipe
-): Fragment(R.layout.show_recipe) {
+class ShowRecipeFragment: Fragment(R.layout.show_recipe) {
 
     private lateinit var ingredientAdapter: IngredientAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val recipe: Recipe = arguments?.getSerializable("recipe") as Recipe
 
         setToolbarTitle(requireActivity(), recipe.name ?: "")
 
@@ -36,26 +37,40 @@ class ShowRecipeFragment (
 
             val recipe = data.userRecipes?.find { r -> r.id == recipe.id }
 
-            val ings = parseIngredients(recipe?.ingredients)
-            requireActivity().runOnUiThread(Runnable {
+            if (recipe != null) {
+                val ings = parseIngredients(recipe.ingredients)
+                requireActivity().runOnUiThread(Runnable {
 
-                //tvRecipeInstructions.text = parseInstructions(recipe?.json ?: "")
-                val htmlDocument = "<html><body><h1>Test Content</h1><p>Testing, testing, testing...</p></body></html>"
-                wvInstructions.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null)
+                    //tvRecipeInstructions.text = parseInstructions(recipe?.json ?: "")
+                    val htmlDocument = "<html><body><h1>Test Content</h1><p>Testing, testing, testing...</p></body></html>"
+                    wvInstructions.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null)
 
-                btnRecipeWebsiteLink.setOnClickListener {
-                    val openURL = Intent(android.content.Intent.ACTION_VIEW)
-                    openURL.data = Uri.parse("https://www.hedacuisine.com/r/${recipe?.id}")
-                    startActivity(openURL)
-                }
+                    //ivShowRecipeImage.setIm
 
-                if (ings != null) {
-                    ingredientAdapter = IngredientAdapter(ings.toMutableList())
+                    loadImage(recipe.image_slug, ivShowRecipeImage)
 
-                    rvIngredients.adapter = ingredientAdapter
-                    rvIngredients.layoutManager = LinearLayoutManager(context)
-                }
-            })
+                    btnRecipeWebsiteLink.setOnClickListener {
+                        val openURL = Intent(android.content.Intent.ACTION_VIEW)
+                        openURL.data = Uri.parse("https://www.hedacuisine.com/r/${recipe.id}")
+                        startActivity(openURL)
+                    }
+
+                    if (ings != null) {
+                        ingredientAdapter = IngredientAdapter(ings.toMutableList())
+
+                        rvIngredients.adapter = ingredientAdapter
+                        rvIngredients.layoutManager = LinearLayoutManager(context)
+                    }
+                })
+            }
+        }
+    }
+
+    companion object {
+        fun newInstance(recipe: Recipe) = ShowRecipeFragment().apply {
+            arguments = Bundle(1).apply {
+                putSerializable("recipe", recipe)
+            }
         }
     }
 

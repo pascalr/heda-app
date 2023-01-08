@@ -5,6 +5,7 @@ Show recipes.
 Clear BackStack when loggin in.
 
 FIXME:
+Sometimes there is a wrong image for recipes.
 Go back does not change tabs...
 Change tabs, inside recipes go back. Change tabs => CRASH
 

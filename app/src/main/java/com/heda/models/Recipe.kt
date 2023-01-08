@@ -1,5 +1,7 @@
 package com.heda.models
 
+import java.io.Serializable
+
 data class Recipe (
     val name: String?,
     val id: Int,
@@ -15,4 +17,4 @@ data class Recipe (
     val is_public: Int?,
     val raw_servings: String?,
     val heda_instructions: String?
-)
+) : Serializable

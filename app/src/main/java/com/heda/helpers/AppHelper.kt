@@ -1,6 +1,9 @@
 package com.heda.helpers
 
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
@@ -11,6 +14,7 @@ import com.heda.view_models.Data
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.squareup.picasso.Picasso
 
 fun toastShort(context: Context?, text: String) {
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
@@ -35,6 +39,24 @@ fun parseIngredients(raw: String?): List<Ingredient> {
         } else {
             null
         }
+    }
+}
+
+const val BASE_WEBSITE_URL = "https://www.hedacuisine.com/"
+
+fun loadImage(imageSlug: String?, imageView: ImageView) {
+    if (imageSlug != null) {
+        val url = BASE_WEBSITE_URL+"imgs/original/"+imageSlug
+        Picasso.get().load(url).into(imageView);
+//        Picasso.get().load(url).into(object : com.squareup.picasso.Target {
+//            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+//                if (bitmap != null) {
+//                    imageView.setImageBitmap(bitmap)
+//                }
+//            }
+//            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {}
+//            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {}
+//        })
     }
 }
 

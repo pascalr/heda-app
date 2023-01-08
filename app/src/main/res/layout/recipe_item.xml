@@ -16,15 +16,16 @@
         android:paddingStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/ivRecipeImage"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivRecipeImage"
         android:layout_width="106dp"
         android:layout_height="72dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/default_recipe_01" />
+        app:srcCompat="@drawable/default_recipe_01"
+        android:scaleType="centerCrop"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
