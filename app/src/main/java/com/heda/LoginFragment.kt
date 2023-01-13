@@ -17,13 +17,12 @@ class LoginFragment : Fragment(R.layout.login_page) {
 
         btnLogin.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_appFragment)
-            //router.changePage(parentFragmentManager) { -> AppFragment() }
             //router.clearBackStack(parentFragmentManager)
+            //https://stackoverflow.com/questions/64913946/clear-back-stack-in-android-navigation-component
         }
 
         btnRegister.setOnClickListener {
             findNavController().navigate(R.id.action_loginFragment_to_registerFragment)
-            //router.changePage(parentFragmentManager) { -> Fragment(R.layout.register_page) }
         }
     }
 }

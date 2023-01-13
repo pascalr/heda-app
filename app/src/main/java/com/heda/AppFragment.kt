@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.tabs.TabLayout
 import com.heda.view_models.RouterViewModel
 import kotlinx.android.synthetic.main.app.*
@@ -15,15 +16,9 @@ class AppFragment : Fragment(R.layout.app) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val router = ViewModelProvider(requireActivity())[RouterViewModel::class.java]
-
-        parentFragmentManager.beginTransaction().apply {
-            replace(R.id.flApp, router.createCurrentTab())
-            commit()
-        }
-
         imgBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            findNavController().navigateUp()
+            //requireActivity().onBackPressed()
         }
     }
 

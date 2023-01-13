@@ -42,6 +42,6 @@
             <action
                 android:id="@+id/action_appFragment_to_recipesFragment2"
                 app:destination="@id/recipesFragment" />
-        </fragment><action android:id="@+id/action_global_appFragment" app:destination="@id/appFragment"/>
+        </fragment>
     </navigation>
 </navigation>
