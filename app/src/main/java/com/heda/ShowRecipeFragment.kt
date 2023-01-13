@@ -66,12 +66,18 @@ class ShowRecipeFragment: Fragment(R.layout.show_recipe) {
         }
     }
 
-    companion object {
-        fun newInstance(recipe: Recipe) = ShowRecipeFragment().apply {
-            arguments = Bundle(1).apply {
-                putSerializable("recipe", recipe)
-            }
-        }
-    }
+    //companion object {
+    //    fun newInstance(recipe: Recipe) = ShowRecipeFragment().apply {
+    //        arguments = Bundle(1).apply {
+    //            putSerializable("recipe", recipe)
+    //        }
+    //    }
+    //}
 
+}
+
+fun recipeBundle(recipe: Recipe) : Bundle {
+    val bundle = Bundle()
+    bundle.putSerializable("recipe", recipe)
+    return bundle
 }

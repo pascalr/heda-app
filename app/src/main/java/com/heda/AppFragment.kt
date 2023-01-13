@@ -17,8 +17,7 @@ class AppFragment : Fragment(R.layout.app) {
         super.onViewCreated(view, savedInstanceState)
 
         imgBack.setOnClickListener {
-            findNavController().navigateUp()
-            //requireActivity().onBackPressed()
+            requireActivity().onBackPressed()
         }
     }
 

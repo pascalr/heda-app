@@ -16,7 +16,7 @@ class LoginFragment : Fragment(R.layout.login_page) {
         val router = ViewModelProvider(requireActivity())[RouterViewModel::class.java]
 
         btnLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_appFragment)
+            findNavController().navigate(R.id.action_loginFragment_to_appFragment3)
             //router.clearBackStack(parentFragmentManager)
             //https://stackoverflow.com/questions/64913946/clear-back-stack-in-android-navigation-component
         }

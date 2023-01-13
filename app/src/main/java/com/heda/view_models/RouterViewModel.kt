@@ -29,8 +29,8 @@ class RouterViewModel : ViewModel() {
     }
 
     fun changeTab(fragmentManager: FragmentManager, tabPos: Int, create: () -> Fragment) {
-        changeFragment(fragmentManager, R.id.flApp, create)
-        tabPosition = tabPos
+        //changeFragment(fragmentManager, R.id.flApp, create)
+        //tabPosition = tabPos
     }
 
     fun clearBackStack(manager: FragmentManager) {
@@ -49,7 +49,7 @@ class RouterViewModel : ViewModel() {
         }
         when (id) {
             //R.id.flMain -> currentPageCreator = create
-            R.id.flApp -> currentTabCreator = create
+            //R.id.flApp -> currentTabCreator = create
         }
     }
 

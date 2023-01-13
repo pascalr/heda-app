@@ -2,9 +2,9 @@ package com.heda
 
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.heda.adapters.RecipeAdapter
 import com.heda.helpers.setToolbarTitle
@@ -29,7 +29,12 @@ class RecipesFragment : Fragment(R.layout.recipes_fragment) {
         dataViewModel.getData(rootDir) { data ->
 
             requireActivity().runOnUiThread(Runnable {
-                val onClick = {recipe: Recipe -> router.changeTab(parentFragmentManager, 3) {-> ShowRecipeFragment.newInstance(recipe)}}
+                //val onClick = {recipe: Recipe -> router.changeTab(parentFragmentManager, 3) {-> ShowRecipeFragment.newInstance(recipe)}}
+                //    fun newInstance(recipe: Recipe) = ShowRecipeFragment().apply {
+                //        arguments = Bundle(1).apply {
+                //            putSerializable("recipe", recipe)
+
+                val onClick = {recipe: Recipe -> findNavController().navigate(R.id.action_recipesFragment_to_showRecipeFragment, recipeBundle(recipe))}
                 recipeAdapter = RecipeAdapter(data.userRecipes?.toMutableList() ?: mutableListOf(), onClick)
                 //recipeAdapter = RecipeAdapter(mutableListOf(Recipe("Bread"), Recipe("Pizza")))
 
