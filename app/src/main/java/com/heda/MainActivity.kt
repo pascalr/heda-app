@@ -3,6 +3,7 @@ package com.heda
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.heda.view_models.RouterViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -14,9 +15,13 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.main)
 
-        supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flMain, router.createCurrentPage())
-            commit()
-        }
+        //val nav = findNavController(R.layout.login_page)
+        //nav.navigate(R.layout.login_page)
+
+        //https://developer.android.com/guide/navigation/navigation-navigate
+        //supportFragmentManager.beginTransaction().apply {
+        //    replace(R.id.flMain, router.createCurrentPage())
+        //    commit()
+        //}
     }
 }

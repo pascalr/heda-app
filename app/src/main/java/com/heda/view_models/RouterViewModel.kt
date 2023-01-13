@@ -25,7 +25,7 @@ class RouterViewModel : ViewModel() {
     }
 
     fun changePage(fragmentManager: FragmentManager, create: () -> Fragment) {
-        changeFragment(fragmentManager, R.id.flMain, create)
+        //changeFragment(fragmentManager, R.id.flMain, create)
     }
 
     fun changeTab(fragmentManager: FragmentManager, tabPos: Int, create: () -> Fragment) {
@@ -48,7 +48,7 @@ class RouterViewModel : ViewModel() {
             commit()
         }
         when (id) {
-            R.id.flMain -> currentPageCreator = create
+            //R.id.flMain -> currentPageCreator = create
             R.id.flApp -> currentTabCreator = create
         }
     }
