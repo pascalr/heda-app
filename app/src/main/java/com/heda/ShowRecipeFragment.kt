@@ -8,10 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.heda.adapters.IngredientAdapter
-import com.heda.helpers.loadImage
-import com.heda.helpers.parseIngredients
-import com.heda.helpers.parseInstructions
-import com.heda.helpers.setToolbarTitle
+import com.heda.helpers.*
 import com.heda.models.Recipe
 import com.heda.view_models.DataViewModel
 import kotlinx.android.synthetic.main.recipes_fragment.*
@@ -41,9 +38,11 @@ class ShowRecipeFragment: Fragment(R.layout.show_recipe) {
                 val ings = parseIngredients(recipe.ingredients)
                 requireActivity().runOnUiThread(Runnable {
 
+                    val css = resources.getRawTextFile(R.raw.main)
+
                     if (recipe.html != null) {
                         //tvRecipeInstructions.text = parseInstructions(recipe?.json ?: "")
-                        val htmlDocument = "<html><body>${recipe.html}</body></html>"
+                        val htmlDocument = "<html><style>$css</style><body>${recipe.html}</body></html>"
                         wvInstructions.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null)
                     }
 

@@ -1,11 +1,13 @@
 package com.heda.helpers
 
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RawRes
 import androidx.fragment.app.FragmentActivity
 import com.heda.R
 import com.heda.models.Ingredient
@@ -68,3 +70,7 @@ fun parseInstructions(json: String): String {
     val doc = jsonAdapter.fromJson(json);
     return "Todo print instructions"
 }
+
+// Source: https://stackoverflow.com/questions/4087674/android-read-text-raw-resource-file
+fun Resources.getRawTextFile(@RawRes id: Int) =
+    openRawResource(id).bufferedReader().use { it.readText() }

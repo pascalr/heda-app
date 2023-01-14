@@ -1,0 +1,32 @@
+.food-name {
+  color: #2a7ffd;
+  font-weight: bold;
+}
+
+*[data-step="true"] {
+  counter-reset: stepnb;
+}
+*[data-step] {
+  counter-increment: stepnb;
+}
+*[data-step]::before {
+  font-weight: bold;
+  content: counter(stepnb) ". ";
+}
+*[data-link-model="note"]::before {
+  content: "[";
+}
+*[data-link-model="note"]::after {
+  content: "]";
+}
+*[data-link-model="note"] {
+  vertical-align: super;
+  font-size: 70%;
+}
+
+ul > li::marker {
+  content: "- ";
+}
+ul {
+  font-style: italic;
+}
