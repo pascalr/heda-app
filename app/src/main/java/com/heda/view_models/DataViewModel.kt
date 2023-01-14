@@ -46,7 +46,7 @@ class DataViewModel: ViewModel() {
                 try {
                     val client = OkHttpClient()
                     val request = Request.Builder()
-                        .url("https://www.hedacuisine.com/fetch_user/5")
+                        .url("https://www.hedacuisine.com/fetch_app_data/5")
                         .build()
 
                     println("***************** Fetching data *****************")

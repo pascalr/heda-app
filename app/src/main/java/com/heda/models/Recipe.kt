@@ -16,5 +16,6 @@ data class Recipe (
     val original_id: Int?,
     val is_public: Int?,
     val raw_servings: String?,
-    val heda_instructions: String?
+    val heda_instructions: String?,
+    val html: String?,
 ) : Serializable

@@ -41,11 +41,11 @@ class ShowRecipeFragment: Fragment(R.layout.show_recipe) {
                 val ings = parseIngredients(recipe.ingredients)
                 requireActivity().runOnUiThread(Runnable {
 
-                    //tvRecipeInstructions.text = parseInstructions(recipe?.json ?: "")
-                    val htmlDocument = "<html><body><h1>Test Content</h1><p>Testing, testing, testing...</p></body></html>"
-                    wvInstructions.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null)
-
-                    //ivShowRecipeImage.setIm
+                    if (recipe.html != null) {
+                        //tvRecipeInstructions.text = parseInstructions(recipe?.json ?: "")
+                        val htmlDocument = "<html><body>${recipe.html}</body></html>"
+                        wvInstructions.loadDataWithBaseURL(null, htmlDocument, "text/HTML", "UTF-8", null)
+                    }
 
                     loadImage(recipe.image_slug, ivShowRecipeImage)
 
