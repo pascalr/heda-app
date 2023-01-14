@@ -32,5 +32,10 @@
         android:id="@+id/searchFragment"
         android:name="com.heda.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" /><action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment"/>
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_showRecipeFragment"
+            app:destination="@id/showRecipeFragment" />
+    </fragment>
+    <action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment" />
 </navigation>

@@ -62,6 +62,22 @@ fun loadImage(imageSlug: String?, imageView: ImageView) {
     }
 }
 
+fun normalizeText(text: String): String {
+    // TODO: Remove accents
+    return text.lowercase()
+}
+
+fun searchScore(text: String, tokens: List<String>): Double {
+    val t = normalizeText(text)
+    var score = -1.0
+    tokens.forEach { token ->
+        if (t.contains(token)) {
+            score += 10.0
+        }
+    }
+    return score
+}
+
 fun parseInstructions(json: String): String {
     val moshi = Moshi.Builder()
         .addLast(KotlinJsonAdapterFactory())
