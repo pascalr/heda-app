@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.speech.RecognizerIntent
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,7 +19,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun recognizeSpeech(callback: (String) -> Unit) {
+        val locale = "fr-CA"
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, locale)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, locale)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, locale)
+            putExtra(RecognizerIntent.EXTRA_ONLY_RETURN_LANGUAGE_PREFERENCE, locale)
             putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
         }
         resultLauncher.launch(intent)
