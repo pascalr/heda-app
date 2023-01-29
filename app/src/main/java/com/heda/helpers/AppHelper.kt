@@ -63,11 +63,12 @@ fun normalizeText(text: String): String {
 }
 
 fun searchScore(text: String, tokens: List<String>): Double {
+    if (text.isBlank()) {return -1.0}
     val t = normalizeText(text)
     var score = -1.0
     tokens.forEach { token ->
         if (t.contains(token)) {
-            score += 10.0
+            score += 10.0 + token.length
         }
     }
     return score

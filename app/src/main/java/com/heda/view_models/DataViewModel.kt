@@ -31,12 +31,8 @@ class DataViewModel: ViewModel() {
     private var data: Data? = null;
 
     private fun jsonToData(json: String): Data? {
-        val moshi = Moshi.Builder()
-            .addLast(KotlinJsonAdapterFactory())
-            .build()
-        //val jsonAdapter: JsonAdapter<Data> = moshi.adapter<Data>()
+        val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
         val jsonAdapter: JsonAdapter<Data> = moshi.adapter(Data::class.java)
-
         return jsonAdapter.fromJson(json);
     }
 

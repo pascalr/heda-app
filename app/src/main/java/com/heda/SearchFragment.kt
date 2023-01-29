@@ -10,6 +10,7 @@ import com.heda.adapters.SearchResultAdapter
 import com.heda.helpers.normalizeText
 import com.heda.helpers.searchScore
 import com.heda.models.Recipe
+import com.heda.models.SearchResult
 import com.heda.view_models.DataViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
 import kotlinx.android.synthetic.main.recipes_fragment.*
@@ -39,7 +40,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         val rootDir = requireActivity().getExternalFilesDir(null)
         dataViewModel.getData(rootDir) { data ->
 
-            matches = data.userRecipes?.filter {r -> r.name != null && searchScore(r.name, words) > 0 }
+
+            //matches = data.userRecipes?.filter {r -> r.name != null && searchScore(r.name, words) > 0 }
+            //val results = matches?.toMutableList()//?.sortBy { match -> match }
+            val scoring = {r: Recipe -> searchScore(r.name ?: "", words)}
+            val rs0 = (data.userRecipes ?: listOf()).map() { r -> SearchResult<Recipe>(r, scoring) }
+            val rs1 = rs0.toMutableList()
+            rs1.sortBy { r -> r.score }
+            val rs2 = rs1.filter { r -> r.score > 0 }.reversed()
+            var rs3 = rs2.map { r -> r.result }.toMutableList()
 
             requireActivity().runOnUiThread(Runnable {
                 //val onClick = {recipe: Recipe -> router.changeTab(parentFragmentManager, 3) {-> ShowRecipeFragment.newInstance(recipe)}}
@@ -48,7 +57,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 //            putSerializable("recipe", recipe)
 
                 val onClick = {recipe: Recipe -> findNavController().navigate(R.id.action_searchFragment_to_showRecipeFragment, recipeBundle(recipe))}
-                searchResultAdapter = SearchResultAdapter(matches?.toMutableList() ?: mutableListOf(), onClick)
+                searchResultAdapter = SearchResultAdapter(rs3 ?: mutableListOf(), onClick)
                 rvSearchItems.adapter = searchResultAdapter
                 rvSearchItems.layoutManager = LinearLayoutManager(context)
             })
