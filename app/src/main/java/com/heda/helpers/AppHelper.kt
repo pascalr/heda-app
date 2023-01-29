@@ -84,7 +84,7 @@ fun searchScore(text: String, tokens: List<String>): Double {
 fun Resources.getRawTextFile(@RawRes id: Int) =
     openRawResource(id).bufferedReader().use { it.readText() }
 
-fun fetch(url: String, method: String, success: (Any) -> Unit) {
+fun fetch(url: String, method: String, success: (String) -> Unit) {
     val thread = Thread {
         try {
             val client = OkHttpClient()
