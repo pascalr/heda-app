@@ -2,25 +2,20 @@ package com.heda.helpers
 
 import android.content.Context
 import android.content.res.Resources
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
+import android.net.Uri.Builder
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RawRes
-import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentActivity
 import com.heda.R
 import com.heda.models.Ingredient
-import com.heda.models.Node
-import com.heda.view_models.Data
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.squareup.picasso.Picasso
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
 import java.io.IOException
+
 
 fun toastShort(context: Context?, text: String) {
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
@@ -84,16 +79,15 @@ fun searchScore(text: String, tokens: List<String>): Double {
 fun Resources.getRawTextFile(@RawRes id: Int) =
     openRawResource(id).bufferedReader().use { it.readText() }
 
-fun fetch(url: String, method: String, success: (String) -> Unit) {
+private fun query(url: String, method: String, data: RequestBody?, success: (String) -> Unit) {
     val thread = Thread {
         try {
             val client = OkHttpClient()
-            val request = Request.Builder()
-                .url(url)
-                .build()
-
-            println("***************** Fetch *****************")
+            val request = Request.Builder().url(url).method(method, data).build()
+            println("***************** Query *****************")
             client.newCall(request).execute().use { response ->
+                println("QUERY RESPONSE")
+                println(response)
                 if (!response.isSuccessful) throw IOException("Unexpected code $response")
                 success(response.body!!.string())
             }
@@ -102,4 +96,12 @@ fun fetch(url: String, method: String, success: (String) -> Unit) {
         }
     }
     thread.start()
+}
+
+fun post(url: String, data: RequestBody, success: (String) -> Unit) {
+    query(url, "POST", data, success)
+}
+
+fun fetch(url: String, method: String, success: (String) -> Unit) {
+    query(url, method, null, success)
 }

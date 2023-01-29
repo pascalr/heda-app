@@ -19,7 +19,7 @@ class LoadingFragment : Fragment(R.layout.fragment_loading) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fetch("${G.host}/am_i_logged_in", "get") { response ->
+        fetch("${G.host}/am_i_logged_in", "GET") { response ->
             val action = when (response) {
                 "1" -> R.id.action_loadingFragment_to_appFragment3
                 else -> R.id.action_loadingFragment_to_loginFragment
