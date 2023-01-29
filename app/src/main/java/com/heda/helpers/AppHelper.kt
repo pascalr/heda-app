@@ -11,9 +11,7 @@ import androidx.fragment.app.FragmentActivity
 import com.heda.R
 import com.heda.models.Ingredient
 import com.squareup.picasso.Picasso
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
+import okhttp3.*
 import java.io.IOException
 
 
@@ -82,7 +80,24 @@ fun Resources.getRawTextFile(@RawRes id: Int) =
 private fun query(url: String, method: String, data: RequestBody?, success: (String) -> Unit) {
     val thread = Thread {
         try {
-            val client = OkHttpClient()
+            //val client = OkHttpClient()
+            // Cookies are required in order to have CSRF token for POST.
+            val client: OkHttpClient = OkHttpClient.Builder()
+                .cookieJar(object : CookieJar {
+                    private val cookieStore: HashMap<String, List<Cookie>> = HashMap()
+
+                    override fun saveFromResponse(url: HttpUrl, cookies: List<Cookie>) {
+                        println("COOKIES!!!")
+                        println(cookies)
+                        cookieStore[url.host] = cookies
+                    }
+
+                    override fun loadForRequest(url: HttpUrl): List<Cookie> {
+                        val cookies = cookieStore[url.host]
+                        return cookies ?: ArrayList()
+                    }
+                })
+                .build()
             val request = Request.Builder().url(url).method(method, data).build()
             println("***************** Query *****************")
             client.newCall(request).execute().use { response ->
