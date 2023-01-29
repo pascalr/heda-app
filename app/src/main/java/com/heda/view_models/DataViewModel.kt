@@ -1,6 +1,8 @@
 package com.heda.view_models
 
 import androidx.lifecycle.ViewModel
+import com.heda.R
+import com.heda.helpers.G
 import com.heda.models.Recipe
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -46,7 +48,7 @@ class DataViewModel: ViewModel() {
                 try {
                     val client = OkHttpClient()
                     val request = Request.Builder()
-                        .url("https://www.hedacuisine.com/fetch_app_data/5")
+                        .url("${G.host}/fetch_app_data/5")
                         .build()
 
                     println("***************** Fetching data *****************")

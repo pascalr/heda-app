@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.speech.RecognizerIntent
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
+import com.heda.helpers.G
+import com.heda.helpers.fetch
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +18,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.main)
+
+        fetch("${G.host}/am_i_logged_in", "get") { response ->
+            println("Am I logged in? $response")
+        }
     }
 
     fun recognizeSpeech(callback: (String) -> Unit) {

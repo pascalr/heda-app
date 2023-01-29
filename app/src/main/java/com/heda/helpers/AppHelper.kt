@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RawRes
+import androidx.annotation.StringRes
 import androidx.fragment.app.FragmentActivity
 import com.heda.R
 import com.heda.models.Ingredient
@@ -17,6 +18,9 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.squareup.picasso.Picasso
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import java.io.IOException
 
 fun toastShort(context: Context?, text: String) {
     Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
@@ -44,11 +48,9 @@ fun parseIngredients(raw: String?): List<Ingredient> {
     }
 }
 
-const val BASE_WEBSITE_URL = "https://www.hedacuisine.com/"
-
 fun loadImage(imageSlug: String?, imageView: ImageView) {
     if (imageSlug != null) {
-        val url = BASE_WEBSITE_URL+"imgs/original/"+imageSlug
+        val url = "${G.host}/imgs/original/"+imageSlug
         Picasso.get().load(url).into(imageView);
 //        Picasso.get().load(url).into(object : com.squareup.picasso.Target {
 //            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
@@ -78,15 +80,26 @@ fun searchScore(text: String, tokens: List<String>): Double {
     return score
 }
 
-fun parseInstructions(json: String): String {
-    val moshi = Moshi.Builder()
-        .addLast(KotlinJsonAdapterFactory())
-        .build()
-    val jsonAdapter: JsonAdapter<Node> = moshi.adapter(Node::class.java)
-    val doc = jsonAdapter.fromJson(json);
-    return "Todo print instructions"
-}
-
 // Source: https://stackoverflow.com/questions/4087674/android-read-text-raw-resource-file
 fun Resources.getRawTextFile(@RawRes id: Int) =
     openRawResource(id).bufferedReader().use { it.readText() }
+
+fun fetch(url: String, method: String, success: (Any) -> Unit) {
+    val thread = Thread {
+        try {
+            val client = OkHttpClient()
+            val request = Request.Builder()
+                .url(url)
+                .build()
+
+            println("***************** Fetch *****************")
+            client.newCall(request).execute().use { response ->
+                if (!response.isSuccessful) throw IOException("Unexpected code $response")
+                success(response.body!!.string())
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+    thread.start()
+}

@@ -50,7 +50,7 @@ class ShowRecipeFragment: Fragment(R.layout.show_recipe) {
 
                     btnRecipeWebsiteLink.setOnClickListener {
                         val openURL = Intent(android.content.Intent.ACTION_VIEW)
-                        openURL.data = Uri.parse("https://www.hedacuisine.com/r/${recipe.id}")
+                        openURL.data = Uri.parse("${G.host}/r/${recipe.id}")
                         startActivity(openURL)
                     }
 
